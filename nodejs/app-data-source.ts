@@ -9,7 +9,7 @@ const myDataSource = new DataSource({
   "database": "multi-authentication-api",
   "synchronize": true,
   "logging": ["error"],
-  "entities": ["src/models/*.ts"],
+  "entities": ["src/models/entities/*.ts"],
 })
 
 export default myDataSource

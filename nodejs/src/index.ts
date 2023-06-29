@@ -2,6 +2,12 @@ import express from 'express'
 import authRoutes from "./routes/authRoutes";
 import myDataSource from "../app-data-source";
 
+const app = express()
+const PORT = 3000
+
+app.use(express.json());
+app.use('/auth', authRoutes);
+
 myDataSource
   .initialize()
   .then(() => {
@@ -11,12 +17,6 @@ myDataSource
     console.log("Error during Data Source initialization:", err)
   })
 
-const app = express()
-app.use(express.json())
-
-const PORT = 3000
-
-app.use('/auth', authRoutes);
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
