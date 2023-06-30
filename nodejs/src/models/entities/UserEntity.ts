@@ -1,10 +1,11 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Gender, ThirdPartyApp } from "../types";
 
-@Entity('users')
+@Entity("users")
 class UserEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
-  @Column({unique: true})
+  @Column({ unique: true })
   email: string;
   @Column()
   password: string;
@@ -15,21 +16,19 @@ class UserEntity {
   @Column()
   birthDate: Date;
   @Column()
-  gender: string;
-  @Column({nullable: true})
+  gender: Gender;
+  @Column({ nullable: true })
   photo: string;
-  @Column({nullable: true})
+  @Column({ nullable: true })
   biography: string;
   @Column()
-  phone: string
-  @Column({update: false, default: "Default"})
-  thirdPartyApp: string
-  @Column({update: false, default: "NodeJS"})
+  phone: string;
+  @Column({ update: false, default: "Default" })
+  thirdPartyApp: ThirdPartyApp;
+  @Column({ update: false, default: "NodeJS" })
   framework: string;
 
-  constructor() {
-  }
-
+  constructor() {}
 }
 
-export default UserEntity
+export default UserEntity;

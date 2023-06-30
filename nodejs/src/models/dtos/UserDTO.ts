@@ -1,15 +1,17 @@
+import { Gender } from "../types";
+
 class UserDTO {
+  id: string;
   email: string;
   name: string;
   lastname: string;
   birthDate: Date;
-  gender: string;
+  gender: Gender;
   photo: string;
   biography: string;
-  phone: string
+  phone: string;
 
-  constructor() {
-  }
+  constructor() {}
 }
 
-export default UserDTO
+export default UserDTO;
