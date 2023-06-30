@@ -5,6 +5,13 @@ import { Gender } from "../src/models/types";
 import { validateEmail } from "../src/helpers/EmailHelper";
 import UserDTO from "../src/models/dtos/UserDTO";
 import UserMapper from "../src/helpers/mappers/UserMapper";
+import {
+  EMAIL_NOT_FOUND,
+  INVALID_EMAIL_PASSWORD,
+  INVALID_GENDER,
+  INVALID_OLD_PASSWORD,
+  NEW_PASSWORD_DIFFERENT,
+} from "../src/models/constants";
 
 class AuthService {
   private userRepository = new UserRepository();
@@ -18,7 +25,7 @@ class AuthService {
       validateEmail(user.email);
       //Verify gender type
       if (!Object.values(Gender).includes(user.gender)) {
-        throw new Error("The gender isn't valid");
+        throw new Error(INVALID_GENDER);
       }
       //Encrypts user password
       user.password = await hashPassword(password);
@@ -42,9 +49,10 @@ class AuthService {
         if (await comparePasswords(password, user.password)) {
           return user;
         } else {
-          throw Error("Invalid email or password. Please try again!");
+          throw Error(INVALID_EMAIL_PASSWORD);
         }
       }
+      throw Error(EMAIL_NOT_FOUND);
     }
     return null;
   }
@@ -63,19 +71,15 @@ class AuthService {
       email.length > 0
     ) {
       if (oldPassword == newPassword) {
-        throw Error("New password must be different to the old password.");
+        throw Error(NEW_PASSWORD_DIFFERENT);
       }
       const user: UserEntity | undefined =
         await this.userRepository.findByEmail(email);
       if (user === undefined) {
-        throw Error(
-          "Email doesn't match to the users registered, please check it again"
-        );
+        throw Error(EMAIL_NOT_FOUND);
       }
       if (!(await comparePasswords(oldPassword, user.password))) {
-        throw Error(
-          "Current password doesn't match with your password, check it again"
-        );
+        throw Error(INVALID_OLD_PASSWORD);
       }
       user.password = await hashPassword(newPassword);
       await this.userRepository.createAndUpdateUser(user);
