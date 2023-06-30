@@ -41,6 +41,22 @@ class AuthController {
       return e.message;
     }
   }
+
+  async changePassword(
+    email: string,
+    oldPassword: string,
+    newPassword: string
+  ): Promise<boolean | string> {
+    try {
+      return await this.authService.changePassword(
+        email,
+        oldPassword,
+        newPassword
+      );
+    } catch (e: any) {
+      return e.message;
+    }
+  }
 }
 
 export default AuthController;
