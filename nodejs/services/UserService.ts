@@ -16,6 +16,7 @@ class UserService {
         newUser.password = oldUser.password;
         newUser.framework = oldUser.framework;
         newUser.thirdPartyApp = oldUser.thirdPartyApp;
+        newUser.photo = oldUser.photo;
         await this.userRepository.createAndUpdateUser(newUser);
         return newUser;
       }

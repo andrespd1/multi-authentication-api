@@ -21,7 +21,6 @@ class UserMapper {
     dto.lastname = entity.lastname;
     dto.birthDate = entity.birthDate;
     dto.gender = entity.gender;
-    dto.photo = entity.photo;
     dto.biography = entity.biography;
     dto.phone = entity.phone;
     return dto;

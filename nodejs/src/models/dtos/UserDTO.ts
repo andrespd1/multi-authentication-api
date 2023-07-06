@@ -7,7 +7,6 @@ class UserDTO {
   lastname: string;
   birthDate: Date;
   gender: Gender;
-  photo: string;
   biography: string;
   phone: string;
 

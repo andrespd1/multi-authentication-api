@@ -2,3 +2,4 @@
 **/.DS_Store
 nodejs/build/
 nodejs/node_modules
+nodejs/.env
